@@ -1,5 +1,0 @@
-- [首页](/)
-- 文档
-  - [快速开始](guide.md)
-  - [常见问题](faq.md)
-- [GitHub](https://github.com/deerwan/homepage) 
