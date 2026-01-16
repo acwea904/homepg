@@ -3,541 +3,841 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#121212">
-    <meta name="robots" content="index, follow">
-    <!-- <title>xxx - homepage</title> -->
-    
-    
+    <title>Horizon | 现代导航中心</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366F1;
+            --primary-dark: #4F46E5;
+            --secondary: #8B5CF6;
+            --accent: #10B981;
+            --dark: #111827;
+            --light: #F9FAFB;
+            --gray-50: #F9FAFB;
+            --gray-100: #F3F4F6;
+            --gray-200: #E5E7EB;
+            --gray-300: #D1D5DB;
+            --gray-400: #9CA3AF;
+            --gray-500: #6B7280;
+            --gray-600: #4B5563;
+            --gray-700: #374151;
+            --gray-800: #1F2937;
+            --gray-900: #111827;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --radius-sm: 0.375rem;
+            --radius: 0.5rem;
+            --radius-lg: 0.75rem;
+            --radius-xl: 1rem;
+            --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
-    
-    <!-- 图标和元数据 -->
-    <link rel="shortcut icon" href="assets/img/favicon.ico">
-    <link rel="apple-touch-icon" href="assets/img/logo.png">
-    <link rel="manifest" href="/manifest.json">
-    
-    <!-- 资源预加载和预连接 -->
-    <link rel="preload" href="https://v1.hitokoto.cn/?c=a" as="fetch" crossorigin>
-    <link rel="preconnect" href="https://v1.hitokoto.cn">
-    <link rel="preconnect" href="https://bing.img.run">
-    <link rel="dns-prefetch" href="https://v1.hitokoto.cn">
-    <link rel="dns-prefetch" href="https://bing.img.run">
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-    <link rel="preconnect" href="https://giscus.app" crossorigin>
-    <!-- 关键CSS内联 -->
-    <link rel="stylesheet" href="assets/css/style.css" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="assets/css/style.css"></noscript>
-    <!-- 异步加载字体图标 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" 
-          integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" 
-          crossorigin="anonymous" referrerpolicy="no-referrer" 
-          media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
-    
-    <!-- Remix Icon -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" 
-          media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"></noscript>
-    <link rel="preload" href="assets/fonts/AlimamaDaoLiTi-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: var(--gray-900);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .app {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+            position: relative;
+        }
+
+        /* 装饰元素 */
+        .bg-blur {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .blur-circle {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.4;
+        }
+
+        .circle-1 {
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            top: 10%;
+            right: 5%;
+        }
+
+        .circle-2 {
+            width: 400px;
+            height: 400px;
+            background: linear-gradient(135deg, var(--accent) 0%, #06B6D4 100%);
+            bottom: 10%;
+            left: 5%;
+        }
+
+        /* 头部 */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.25rem;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .date-time {
+            font-size: 0.875rem;
+            color: var(--gray-600);
+            font-weight: 500;
+            background: rgba(255, 255, 255, 0.7);
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* 搜索区域 */
+        .search-section {
+            max-width: 700px;
+            margin: 0 auto 4rem;
+        }
+
+        .search-container {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1.25rem 1.5rem 1.25rem 3.5rem;
+            font-size: 1.125rem;
+            background: rgba(255, 255, 255, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: var(--radius-lg);
+            color: var(--gray-900);
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+            background: rgba(255, 255, 255, 0.95);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray-500);
+            font-size: 1.25rem;
+        }
+
+        .search-engines {
+            display: flex;
+            gap: 0.75rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .engine-btn {
+            padding: 0.625rem 1.25rem;
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: var(--radius);
+            color: var(--gray-700);
+            font-weight: 500;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+        }
+
+        .engine-btn:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .engine-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* 快速链接区域 */
+        .quick-links-section {
+            margin-bottom: 4rem;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-title i {
+            color: var(--primary);
+        }
+
+        .section-actions {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .icon-btn {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: var(--radius);
+            color: var(--gray-700);
+            cursor: pointer;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+        }
+
+        .icon-btn:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .link-card {
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            text-decoration: none;
+            color: var(--gray-800);
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .link-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .link-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .link-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .link-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            font-size: 1.75rem;
+            color: white;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            box-shadow: var(--shadow);
+        }
+
+        .link-name {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .link-desc {
+            font-size: 0.875rem;
+            color: var(--gray-600);
+            line-height: 1.4;
+        }
+
+        /* 分类区域 */
+        .categories-section {
+            margin-bottom: 4rem;
+        }
+
+        .categories-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            overflow-x: auto;
+            padding-bottom: 0.5rem;
+        }
+
+        .category-tab {
+            padding: 0.75rem 1.5rem;
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: var(--radius);
+            color: var(--gray-700);
+            font-weight: 500;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: var(--transition);
+            white-space: nowrap;
+            backdrop-filter: blur(10px);
+        }
+
+        .category-tab:hover {
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .category-tab.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .category-content {
+            display: none;
+        }
+
+        .category-content.active {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .category-item {
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+            color: var(--gray-800);
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+        }
+
+        .category-item:hover {
+            transform: translateX(5px);
+            box-shadow: var(--shadow-lg);
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .category-item i {
+            font-size: 1.5rem;
+            color: var(--primary);
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(99, 102, 241, 0.1);
+            border-radius: var(--radius);
+        }
+
+        .category-item-content h3 {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            font-size: 1rem;
+        }
+
+        .category-item-content p {
+            font-size: 0.875rem;
+            color: var(--gray-600);
+        }
+
+        /* 底部 */
+        footer {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.5);
+            text-align: center;
+            color: var(--gray-600);
+            font-size: 0.875rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links a {
+            color: var(--gray-600);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .app {
+                padding: 1.5rem 1rem;
+            }
+            
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1.5rem;
+            }
+            
+            .nav-controls {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .links-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 1rem;
+            }
+            
+            .link-card {
+                padding: 1.25rem 1rem;
+            }
+            
+            .category-content.active {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* 动画 */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        .delay-1 { animation-delay: 0.1s; opacity: 0; }
+        .delay-2 { animation-delay: 0.2s; opacity: 0; }
+        .delay-3 { animation-delay: 0.3s; opacity: 0; }
+        .delay-4 { animation-delay: 0.4s; opacity: 0; }
+    </style>
 </head>
 <body>
-<!-- 无障碍性：跳转到主内容 -->
-<a href="#main-content" class="skip-link">跳转到主内容</a>
+    <!-- 背景模糊装饰 -->
+    <div class="bg-blur">
+        <div class="blur-circle circle-1"></div>
+        <div class="blur-circle circle-2"></div>
+    </div>
 
-<div id="global-loading">
-  <div class="spinner"></div>
-  <div class="loading-text">正在加载...</div>
-</div>
-    <main class="container" role="main" id="main-content">
-        <div class="content">
-            <header>
-                <div class="logo">
-                    <picture>
-                        <source srcset="assets/img/logo-optimized.png" type="image/png">
-                        <img src="assets/img/logo-optimized.png" alt="Deer Logo" width="120" height="120" loading="eager" decoding="async">
-                    </picture>
-                </div>
-                <p class="subtitle" aria-label="问候语">hi 👋,Welcome</p>   <!-- Hi 👋, Welcome -->
-            </header>
-                
-            <div class="hitokoto" aria-live="polite" role="region" aria-label="每日一言">
-                <p class="hitokoto-text" aria-describedby="hitokoto-source">加载中...</p>
-                <p class="hitokoto-from" id="hitokoto-source">- [加载中...]</p>
+    <div class="app">
+        <!-- 头部 -->
+        <header>
+            <div class="logo">
+                <div class="logo-icon">H</div>
+                <div class="logo-text">Horizon</div>
             </div>
-            
-            <!-- 移动端汉堡菜单按钮 -->
-            <button class="mobile-menu-toggle" aria-label="打开菜单" aria-expanded="false">
-                <span class="hamburger-line"></span>
-                <span class="hamburger-line"></span>
-                <span class="hamburger-line"></span>
-            </button>
-            
-            <nav class="navigation" aria-label="主导航" role="navigation">
-                <!-- <a href="https://deerwan.github.io" class="nav-item" rel="noopener" target="_blank" aria-describedby="external-link-notice">
-                    博客<span class="sr-only">（在新窗口打开）</span>
-                </a> -->
-                <a href="#navigation" class="nav-item" aria-describedby="nav-description">导航</a>
-                <!-- <a href="#guestbook" class="nav-item" aria-describedby="guestbook-description">留言</a> -->
-                <a href="#friends" class="nav-item" aria-describedby="friends-description">友链</a>
-                <!-- <a href="#about" class="nav-item" aria-describedby="about-description">关于</a> -->
-                
-                <!-- 屏幕阅读器说明 -->
-                <div class="sr-only">
-                    <span id="external-link-notice">外部链接，将在新窗口打开</span>
-                    <span id="nav-description">个人导航页面</span>
-                    <span id="guestbook-description">留言板页面</span>
-                    <span id="friends-description">友情链接页面</span>
-                    <span id="about-description">个人简介页面</span>
-                </div>
-            </nav>
-        </div>
-    </main>
-    
-    <!-- 关于页面 -->
-    <section id="about" class="section" aria-label="关于我">
-        <div class="about-container">
-            <a href="#" class="back-btn" id="back-btn-about"><i class="fas fa-arrow-left" aria-hidden="true"></i> <span>返回</span></a>
-            <h2 class="section-title">关于我</h2>
-            <div class="about-content">
-                <div class="about-avatar">
-                    <picture>
-                        <source srcset="assets/img/logo-optimized.png" type="image/png">
-                        <img src="assets/img/logo-optimized.png" alt="个人头像" width="200" height="200" loading="lazy" decoding="async">
-                    </picture>
-                    <div class="social-links about-social">
-                        <a href="https://github.com/deerwan" target="_blank" rel="noopener" aria-label="GitHub主页">
-                            <i class="fab fa-github" aria-hidden="true"></i>
-                        </a>
-                        <a href="https://deerwan.github.io" target="_blank" rel="noopener" aria-label="博客">
-                            <i class="fas fa-blog" aria-hidden="true"></i>
-                        </a>
-                        <a href="mailto:mrdeer7@qq.com" rel="noopener noreferrer" aria-label="发送邮件">
-                            <i class="fas fa-envelope" aria-hidden="true"></i>
-                        </a>
-                        <a href="https://t.me/mrdeer77" target="_blank" rel="noopener" aria-label="Telegram群组">
-                            <i class="fab fa-telegram-plane" aria-hidden="true"></i>
-                        </a>
-                        <a href="https://t.me/mrdeer7" target="_blank" rel="noopener" aria-label="Telegram频道">
-                            <i class="fab fa-telegram" aria-hidden="true"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="about-info">
-                    <h3>个人简介 🦌</h3>
-                    <p>欢迎来到我的个人主页!</p>
-                    <div style="margin: 1.5rem 0;">
-                        <h3>生活碎片 📷</h3>
-                        <a href="https://log.lllh.de/" class="nav-item" rel="noopener" target="_blank" style="display:inline-flex; margin-top:0.5rem;">旅行日记</a>
-                    </div>
-                    <h3>技能标签 💻</h3>
-                    <div class="skill-tags" aria-label="我的技能">
-                        <span class="skill-tag">HTML/CSS</span>
-                        <span class="skill-tag">JavaScript</span>
-                        <span class="skill-tag">React</span>
-                        <span class="skill-tag">Node.js</span>
-                        <span class="skill-tag">Python</span>
-                    </div>
-                    
-                    <h3>兴趣爱好 🎈</h3>
-                    <p>编程、阅读、摄影、旅行</p>
-                </div>
+            <div class="nav-controls">
+                <div class="date-time" id="datetime">星期四, 1月16日 11:30</div>
+                <button class="icon-btn" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
             </div>
-        </div>
-    </section>
-    
-    <!-- 留言板 -->
-    <section id="guestbook" class="section" aria-label="留言板">
-        <div class="about-container">
-            <a href="#" class="back-btn" id="back-btn-guestbook"><i class="fas fa-arrow-left" aria-hidden="true"></i> <span>返回</span></a>
-            <h2 class="section-title">留言板</h2>
-            
-            <!-- Giscus 评论容器 - 修改为直接嵌入版本，解决跨域问题 -->
-            <div id="giscus-container" class="giscus-container">
-                <script src="https://giscus.app/client.js"
-                    data-repo="deerwan/homepage"
-                    data-repo-id="R_kgDONnyo4Q"
-                    data-category="Announcements"
-                    data-category-id="DIC_kwDONnyo4c4CsCfJ"
-                    data-mapping="pathname"
-                    data-strict="0"
-                    data-reactions-enabled="1"
-                    data-emit-metadata="0"
-                    data-input-position="top"
-                    data-theme="dark_dimmed"
-                    data-lang="zh-CN"
-                    data-loading="lazy"
-                    crossorigin="anonymous"
-                    async>
-                </script>
-                <noscript>请启用JavaScript以使用评论系统。</noscript>
-            </div>
-        </div>
-    </section>
-    
-    
-    <!-- 友链板块 -->
-    <section id="friends" class="section" aria-label="友链">
-      <div class="about-container">
-        <a href="#" class="back-btn" id="back-btn-friends"><i class="fas fa-arrow-left" aria-hidden="true"></i> <span>返回</span></a>
-        <h2 class="section-title">友链</h2>
-        <div class="friends-list">
-          <a class="friend-item" href="https://linux.do/" target="_blank" rel="noopener">
-            <img src="https://www.faviconextractor.com/favicon/linux.do" alt="LINUX DO" width="48" height="48" class="avatar-round">
-            <div>
-              <div class="friend-name">LINUX DO</div>
-              <div class="friend-desc">新的理想型社区</div>
-            </div>
-          </a>
-          
-          <a class="friend-item" href="https://hongshi.qzz.io/" target="_blank" rel="noopener">
-            <img src="https://hongshi.qzz.io/favicon.png" alt="blog-hongshi" width="48" height="48" class="avatar-round">
-            <div>
-              <div class="friend-name">红石の空间站</div>
-              <div class="friend-desc">一个高中牲的小站</div>
-            </div>
-          </a>
-          
-          <a class="friend-item" href="https://segmentfault.com/" target="_blank" rel="noopener">
-            <img src="https://www.faviconextractor.com/favicon/segmentfault.com" alt="SegmentFault" width="48" height="48" class="avatar-round">
-            <div>
-              <div class="friend-name">SegmentFault 思否</div>
-              <div class="friend-desc">中文技术问答社区</div>
-            </div>
-          </a>
-          
-          <a class="friend-item" href="https://juejin.cn/" target="_blank" rel="noopener">
-            <img src="https://www.faviconextractor.com/favicon/juejin.cn" alt="掘金" width="48" height="48" class="avatar-round">
-            <div>
-              <div class="friend-name">掘金</div>
-              <div class="friend-desc">开发者技术社区</div>
-            </div>
-          </a>
-          
-          <a class="friend-item" href="https://stackoverflow.com/" target="_blank" rel="noopener">
-            <img src="https://www.faviconextractor.com/favicon/stackoverflow.com" alt="Stack Overflow" width="48" height="48" class="avatar-round">
-            <div>
-              <div class="friend-name">Stack Overflow</div>
-              <div class="friend-desc">全球程序员问答社区</div>
-            </div>
-          </a>
-          
-          <a class="friend-item" href="https://www.zhihu.com/" target="_blank" rel="noopener">
-            <img src="https://www.faviconextractor.com/favicon/zhihu.com" alt="知乎" width="48" height="48" class="avatar-round">
-            <div>
-              <div class="friend-name">知乎</div>
-              <div class="friend-desc">中文问答社区</div>
-            </div>
-          </a>
-          
-          <a class="friend-item" href="https://sspai.com/" target="_blank" rel="noopener">
-            <img src="https://www.faviconextractor.com/favicon/sspai.com" alt="少数派" width="48" height="48" class="avatar-round">
-            <div>
-              <div class="friend-name">少数派</div>
-              <div class="friend-desc">高质量数字生活指南</div>
-            </div>
-          </a>
-          
-          <a class="friend-item" href="https://www.reddit.com/r/programming/" target="_blank" rel="noopener">
-            <img src="https://www.faviconextractor.com/favicon/reddit.com" alt="Reddit Programming" width="48" height="48" class="avatar-round">
-            <div>
-              <div class="friend-name">Reddit Programming</div>
-              <div class="friend-desc">编程话题讨论社区</div>
-            </div>
-          </a>
-          
-          <a class="friend-item" href="https://news.ycombinator.com/" target="_blank" rel="noopener">
-            <img src="https://www.faviconextractor.com/favicon/news.ycombinator.com" alt="Hacker News" width="48" height="48" class="avatar-round">
-            <div>
-              <div class="friend-name">Hacker News</div>
-              <div class="friend-desc">科技新闻与讨论</div>
-            </div>
-          </a>
-          
-          <a class="friend-item" href="https://dev.to/" target="_blank" rel="noopener">
-            <img src="https://www.faviconextractor.com/favicon/dev.to" alt="DEV Community" width="48" height="48" class="avatar-round">
-            <div>
-              <div class="friend-name">DEV Community</div>
-              <div class="friend-desc">开发者写作平台</div>
-            </div>
-          </a>
-          
-          <!-- 更多友链可以在这里添加 -->
+        </header>
 
+        <!-- 搜索区域 -->
+        <section class="search-section fade-in">
+            <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" class="search-input" id="searchInput" placeholder="搜索网站、工具或资源...">
+            </div>
+            <div class="search-engines">
+                <button class="engine-btn active" data-engine="google">Google</button>
+                <button class="engine-btn" data-engine="github">GitHub</button>
+                <button class="engine-btn" data-engine="stackoverflow">Stack Overflow</button>
+                <button class="engine-btn" data-engine="mdn">MDN</button>
+                <button class="engine-btn" data-engine="youtube">YouTube</button>
+            </div>
+        </section>
 
-        </div>
-        <!-- 友链提交入口 -->
-        <!-- <div class="friend-submit mt-2">
-          <div class="friend-submit-header" id="friend-submit-toggle">
-            <h3>申请友链</h3>
-            <button class="toggle-btn" aria-expanded="false" aria-label="展开友链申请表单">
-              <i class="fas fa-chevron-down"></i>
-            </button>
-          </div>
-          <div class="friend-submit-form" id="friend-submit-form" style="display: none;">
-            <form id="friend-link-form">
-              <input type="text" name="name" placeholder="您的网站名称" required class="mb-05">
-              <input type="url" name="url" placeholder="您的网站链接" required class="mb-05">
-              <input type="url" name="logo" placeholder="Logo图片链接（可选）" class="mb-05">
-              <textarea name="desc" placeholder="网站描述（可选）" rows="2" class="mb-05"></textarea>
-              <div class="mb-05" style="text-align:left; color:#fff;">
-                <label style="margin-right:1.5rem;">
-                  <input type="radio" name="pushType" value="telegram" required> Telegram
-                </label>
-                <label>
-                  <input type="radio" name="pushType" value="feishu" required> 飞书
-                </label>
-              </div>
-              <button type="submit">提交申请</button>
-            </form>
-            <div id="friend-link-result" class="friend-result"></div>
-          </div>
-        </div> -->
-        </div>
-    </section>
-    
-    <!-- 个人导航板块 -->
-    <section id="navigation" class="section" aria-label="个人导航">
-        <div class="about-container">
-            <a href="#" class="back-btn" id="back-btn-navigation"><i class="fas fa-arrow-left" aria-hidden="true"></i> <span>返回</span></a>
-            <h2 class="section-title">个人导航</h2>
-            <div class="navigation-intro">
-                <p>这里收集了一些我常用的网站和工具，希望对您也有帮助！</p>
-            </div>
-            
-            <div class="navigation-categories">
-                <!-- 自用板块 -->
-                <div class="nav-category">
-                    <h3><i class="fas fa-rocket" aria-hidden="true"></i> 自用应用</h3>
-                    <div class="nav-links">
-                        <a class="nav-link-item" href="https://nezha.xinxi.pp.ua/" target="_blank" rel="noopener">
-                            <span class="nav-icon emoji-icon">🚀</span>
-                            <div>
-                                <div class="nav-name">Nezha</div>
-                                <div class="nav-desc">服务器监控</div>
-                            </div>
-                        </a>
-                        <a class="nav-link-item" href="https://kuma.xinxi.pp.ua/" target="_blank" rel="noopener">
-                            <img src="https://www.faviconextractor.com/favicon/status.106996.xyz" alt="应用2" width="32" height="32" class="nav-icon">
-                            <div>
-                                <div class="nav-name">Uptimerobot</div>
-                                <div class="nav-desc">网站监控</div>
-                            </div>
-                        </a>
-                        <a class="nav-link-item" href="https://sun.952780.xyz/" target="_blank" rel="noopener">
-                            <img src="https://www.faviconextractor.com/favicon/sun.952780.xyz" alt="应用3" width="32" height="32" class="nav-icon">
-                            <div>
-                                <div class="nav-name">SunPanel</div>
-                                <div class="nav-desc">自用导航</div>
-                            </div>
-                        </a>
-                        <a class="nav-link-item" href="https://pro.952780.xyz/" target="_blank" rel="noopener">
-                            <img src="https://www.faviconextractor.com/favicon/pro.952780.xyz" alt="Pro" width="32" height="32" class="nav-icon">
-                            <div>
-                                <div class="nav-name">Pro</div>
-                                <div class="nav-desc">京豆登录</div>
-                            </div>
-                        </a>
-                        <a class="nav-link-item" href="https://rabbit.952780.xyz/" target="_blank" rel="noopener">
-                            <img src="https://www.faviconextractor.com/favicon/rabbit.952780.xyz" alt="Rabbit" width="32" height="32" class="nav-icon">
-                            <div>
-                                <div class="nav-name">Rabbit</div>
-                                <div class="nav-desc">京东登录</div>
-                            </div>
-                        </a>
-                        <a class="nav-link-item" href="https://img.106996.xyz/" target="_blank" rel="noopener">
-                            <img src="https://www.faviconextractor.com/favicon/img.106996.xyz" alt="图片服务" width="32" height="32" class="nav-icon">
-                            <div>
-                                <div class="nav-name">ImgHub</div>
-                                <div class="nav-desc">图床</div>
-                            </div>
-                        </a>
-                        <a class="nav-link-item" href="https://card-tab.106996.xyz/" target="_blank" rel="noopener">
-                            <span class="nav-icon emoji-icon">📋</span>
-                            <div>
-                                <div class="nav-name">card-tab</div>
-                                <div class="nav-desc">导航卡片管理</div>
-                            </div>
-                        </a>
-                        <a class="nav-link-item" href="https://webssh.xinxi.pp.ua/" target="_blank" rel="noopener">
-                            <img src="https://www.faviconextractor.com/favicon/ssh.cmliussss.net" alt="WebSSH" width="32" height="32" class="nav-icon">
-                            <div>
-                                <div class="nav-name">WebSSH</div>
-                                <div class="nav-desc">在线SSH终端</div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                
-                <!-- 开发工具 -->
-                <div class="nav-category">
-                    <h3><i class="fas fa-code" aria-hidden="true"></i> 开发工具</h3>
-                    <div class="nav-links">
-                        <a class="nav-link-item" href="https://github.com" target="_blank" rel="noopener">
-                            <img src="https://www.faviconextractor.com/favicon/github.com" alt="GitHub" width="32" height="32" class="nav-icon">
-                            <div>
-                                <div class="nav-name">GitHub</div>
-                                <div class="nav-desc">代码托管平台</div>
-                            </div>
-                        </a>
-                        <a class="nav-link-item" href="https://stackoverflow.com" target="_blank" rel="noopener">
-                            <img src="https://www.faviconextractor.com/favicon/stackoverflow.com" alt="Stack Overflow" width="32" height="32" class="nav-icon">
-                            <div>
-                                <div class="nav-name">Stack Overflow</div>
-                                <div class="nav-desc">程序员问答社区</div>
-                            </div>
-                        </a>
-                        <a class="nav-link-item" href="https://developer.mozilla.org" target="_blank" rel="noopener">
-                            <img src="https://www.faviconextractor.com/favicon/developer.mozilla.org" alt="MDN Web Docs" width="32" height="32" class="nav-icon">
-                            <div>
-                                <div class="nav-name">MDN Web Docs</div>
-                                <div class="nav-desc">Web开发文档</div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                
-                <!-- 学习资源 -->
-                <div class="nav-category">
-                    <h3><i class="fas fa-graduation-cap" aria-hidden="true"></i> 学习资源</h3>
-                    <div class="nav-links">
-                        <a class="nav-link-item" href="https://www.w3schools.com" target="_blank" rel="noopener">
-                            <img src="https://www.faviconextractor.com/favicon/w3schools.com" alt="W3Schools" width="32" height="32" class="nav-icon">
-                            <div>
-                                <div class="nav-name">W3Schools</div>
-                                <div class="nav-desc">Web技术教程</div>
-                            </div>
-                        </a>
-                        <a class="nav-link-item" href="https://www.freecodecamp.org" target="_blank" rel="noopener">
-                            <img src="https://www.faviconextractor.com/favicon/freecodecamp.org" alt="freeCodeCamp" width="32" height="32" class="nav-icon">
-                            <div>
-                                <div class="nav-name">freeCodeCamp</div>
-                                <div class="nav-desc">免费编程学习平台</div>
-                            </div>
-                        </a>
-                        <a class="nav-link-item" href="https://www.udemy.com" target="_blank" rel="noopener">
-                            <img src="https://www.faviconextractor.com/favicon/udemy.com" alt="Udemy" width="32" height="32" class="nav-icon">
-                            <div>
-                                <div class="nav-name">Udemy</div>
-                                <div class="nav-desc">在线课程平台</div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                
-                <!-- 实用工具 -->
-                <div class="nav-category">
-                    <h3><i class="fas fa-tools" aria-hidden="true"></i> 实用工具</h3>
-                    <div class="nav-links">
-                        <a class="nav-link-item" href="https://www.canva.com" target="_blank" rel="noopener">
-                            <img src="https://www.faviconextractor.com/favicon/canva.com" alt="Canva" width="32" height="32" class="nav-icon">
-                            <div>
-                                <div class="nav-name">Canva</div>
-                                <div class="nav-desc">在线设计工具</div>
-                            </div>
-                        </a>
-                        <a class="nav-link-item" href="https://www.notion.so" target="_blank" rel="noopener">
-                            <img src="https://www.faviconextractor.com/favicon/notion.so" alt="Notion" width="32" height="32" class="nav-icon">
-                            <div>
-                                <div class="nav-name">Notion</div>
-                                <div class="nav-desc">笔记和协作工具</div>
-                            </div>
-                        </a>
-                        <a class="nav-link-item" href="https://www.figma.com" target="_blank" rel="noopener">
-                            <img src="https://www.faviconextractor.com/favicon/figma.com" alt="Figma" width="32" height="32" class="nav-icon">
-                            <div>
-                                <div class="nav-name">Figma</div>
-                                <div class="nav-desc">UI/UX设计工具</div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                
-                <!-- 娱乐休闲 -->
-                <div class="nav-category">
-                    <h3><i class="fas fa-gamepad" aria-hidden="true"></i> 娱乐休闲</h3>
-                    <div class="nav-links">
-                        <a class="nav-link-item" href="https://www.youtube.com" target="_blank" rel="noopener">
-                            <img src="https://www.faviconextractor.com/favicon/youtube.com" alt="YouTube" width="32" height="32" class="nav-icon">
-                            <div>
-                                <div class="nav-name">YouTube</div>
-                                <div class="nav-desc">视频分享平台</div>
-                            </div>
-                        </a>
-                        <a class="nav-link-item" href="https://www.bilibili.com" target="_blank" rel="noopener">
-                            <img src="https://www.faviconextractor.com/favicon/bilibili.com" alt="哔哩哔哩" width="32" height="32" class="nav-icon">
-                            <div>
-                                <div class="nav-name">哔哩哔哩</div>
-                                <div class="nav-desc">视频弹幕网站</div>
-                            </div>
-                        </a>
-                        <a class="nav-link-item" href="https://music.163.com" target="_blank" rel="noopener">
-                            <img src="https://www.faviconextractor.com/favicon/music.163.com" alt="网易云音乐" width="32" height="32" class="nav-icon">
-                            <div>
-                                <div class="nav-name">网易云音乐</div>
-                                <div class="nav-desc">音乐播放平台</div>
-                            </div>
-                        </a>
-                    </div>
+        <!-- 快速链接 -->
+        <section class="quick-links-section fade-in delay-1">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <i class="fas fa-rocket"></i>
+                    快速访问
+                </h2>
+                <div class="section-actions">
+                    <button class="icon-btn" title="添加新链接">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                    <button class="icon-btn" title="编辑链接">
+                        <i class="fas fa-edit"></i>
+                    </button>
                 </div>
             </div>
-        </div>
-    </section>
-    
-    <footer class="footer" role="contentinfo">
-        <!-- <div class="footer-content">
-            <p>
-                Deer &copy; <span id="current-year"></span>
-                <a href="https://github.com/deerwan/homepage_demo" target="_blank" rel="noopener" style="color: inherit; text-decoration: none; margin-left: 10px;">
-                    <i class="ri-github-fill"></i> GitHub
+            <div class="links-grid">
+                <a href="https://github.com" class="link-card fade-in delay-2" target="_blank">
+                    <div class="link-icon">
+                        <i class="fab fa-github"></i>
+                    </div>
+                    <div class="link-name">GitHub</div>
+                    <div class="link-desc">代码托管与协作</div>
                 </a>
-            </p>
-        </div> -->
-    </footer>
+                <a href="https://figma.com" class="link-card fade-in delay-2" target="_blank">
+                    <div class="link-icon">
+                        <i class="fab fa-figma"></i>
+                    </div>
+                    <div class="link-name">Figma</div>
+                    <div class="link-desc">设计协作平台</div>
+                </a>
+                <a href="https://notion.so" class="link-card fade-in delay-3" target="_blank">
+                    <div class="link-icon">
+                        <i class="fas fa-sticky-note"></i>
+                    </div>
+                    <div class="link-name">Notion</div>
+                    <div class="link-desc">一体化工作空间</div>
+                </a>
+                <a href="https://chat.openai.com" class="link-card fade-in delay-3" target="_blank">
+                    <div class="link-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="link-name">ChatGPT</div>
+                    <div class="link-desc">AI助手</div>
+                </a>
+                <a href="https://vscode.dev" class="link-card fade-in delay-4" target="_blank">
+                    <div class="link-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <div class="link-name">VS Code</div>
+                    <div class="link-desc">在线代码编辑器</div>
+                </a>
+                <a href="https://calendar.google.com" class="link-card fade-in delay-4" target="_blank">
+                    <div class="link-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <div class="link-name">Google Calendar</div>
+                    <div class="link-desc">日程管理</div>
+                </a>
+            </div>
+        </section>
 
-    <!-- 模块化主脚本 -->
-    <script type="module" src="assets/js/app.js"></script>
-    
-    <!-- 降级支持：非ES6模块浏览器使用原始脚本 -->
-    <script nomodule src="assets/js/main.js" defer></script>
-    
-    <!-- 结构化数据 -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Deer",
-      "url": "https://lllh.de",
-      "image": "/assets/img/logo.png",
-      "sameAs": [
-        "https://github.com/deerwan",
-        "https://deerwan.github.io"
-      ],
-      "jobTitle": "开发者",
-      "knowsAbout": ["Web开发", "前端技术", "JavaScript", "React", "Node.js", "Python"]
-    }
+        <!-- 分类导航 -->
+        <section class="categories-section fade-in delay-3">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <i class="fas fa-th-large"></i>
+                    分类导航
+                </h2>
+            </div>
+            <div class="categories-tabs">
+                <button class="category-tab active" data-target="development">开发工具</button>
+                <button class="category-tab" data-target="design">设计资源</button>
+                <button class="category-tab" data-target="productivity">效率工具</button>
+                <button class="category-tab" data-target="learning">学习平台</button>
+            </div>
+            <div class="category-content active" id="development">
+                <a href="https://codepen.io" class="category-item" target="_blank">
+                    <i class="fab fa-codepen"></i>
+                    <div class="category-item-content">
+                        <h3>CodePen</h3>
+                        <p>前端代码 playground</p>
+                    </div>
+                </a>
+                <a href="https://stackoverflow.com" class="category-item" target="_blank">
+                    <i class="fab fa-stack-overflow"></i>
+                    <div class="category-item-content">
+                        <h3>Stack Overflow</h3>
+                        <p>开发者问答社区</p>
+                    </div>
+                </a>
+                <a href="https://devdocs.io" class="category-item" target="_blank">
+                    <i class="fas fa-book"></i>
+                    <div class="category-item-content">
+                        <h3>DevDocs</h3>
+                        <p>API 文档聚合</p>
+                    </div>
+                </a>
+                <a href="https://npmjs.com" class="category-item" target="_blank">
+                    <i class="fab fa-npm"></i>
+                    <div class="category-item-content">
+                        <h3>npm</h3>
+                        <p>JavaScript 包管理器</p>
+                    </div>
+                </a>
+            </div>
+            <div class="category-content" id="design">
+                <a href="https://dribbble.com" class="category-item" target="_blank">
+                    <i class="fas fa-basketball-ball"></i>
+                    <div class="category-item-content">
+                        <h3>Dribbble</h3>
+                        <p>设计师作品展示平台</p>
+                    </div>
+                </a>
+                <a href="https://unsplash.com" class="category-item" target="_blank">
+                    <i class="fas fa-camera"></i>
+                    <div class="category-item-content">
+                        <h3>Unsplash</h3>
+                        <p>免费高清图片库</p>
+                    </div>
+                </a>
+                <a href="https://fonts.google.com" class="category-item" target="_blank">
+                    <i class="fas fa-font"></i>
+                    <div class="category-item-content">
+                        <h3>Google Fonts</h3>
+                        <p>免费字体库</p>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- 底部 -->
+        <footer class="fade-in delay-4">
+            <div class="footer-links">
+                <a href="#">隐私政策</a>
+                <a href="#">使用条款</a>
+                <a href="#">帮助中心</a>
+                <a href="#">反馈建议</a>
+            </div>
+            <p>&copy; 2023 Horizon 导航中心. 保留所有权利.</p>
+        </footer>
+    </div>
+
+    <script>
+        // 更新时间显示
+        function updateDateTime() {
+            const now = new Date();
+            const options = { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            };
+            const dateStr = now.toLocaleDateString('zh-CN', options);
+            document.getElementById('datetime').textContent = dateStr;
+        }
+        
+        updateDateTime();
+        setInterval(updateDateTime, 60000); // 每分钟更新一次
+
+        // 主题切换
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        
+        themeToggle.addEventListener('click', function() {
+            body.classList.toggle('dark-theme');
+            const icon = themeToggle.querySelector('i');
+            
+            if (body.classList.contains('dark-theme')) {
+                icon.className = 'fas fa-sun';
+                // 更新背景为深色
+                document.body.style.background = 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)';
+                // 更新CSS变量为深色
+                document.documentElement.style.setProperty('--light', '#1F2937');
+                document.documentElement.style.setProperty('--dark', '#F9FAFB');
+                document.documentElement.style.setProperty('--gray-50', '#111827');
+                document.documentElement.style.setProperty('--gray-100', '#1F2937');
+                document.documentElement.style.setProperty('--gray-900', '#F9FAFB');
+            } else {
+                icon.className = 'fas fa-moon';
+                // 恢复浅色背景
+                document.body.style.background = 'linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%)';
+                // 恢复浅色CSS变量
+                document.documentElement.style.setProperty('--light', '#F9FAFB');
+                document.documentElement.style.setProperty('--dark', '#111827');
+                document.documentElement.style.setProperty('--gray-50', '#F9FAFB');
+                document.documentElement.style.setProperty('--gray-100', '#F3F4F6');
+                document.documentElement.style.setProperty('--gray-900', '#111827');
+            }
+        });
+
+        // 搜索引擎切换
+        const engineBtns = document.querySelectorAll('.engine-btn');
+        const searchInput = document.getElementById('searchInput');
+        
+        engineBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                engineBtns.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                // 根据搜索引擎更新占位符
+                const engine = this.getAttribute('data-engine');
+                const placeholders = {
+                    google: '使用 Google 搜索...',
+                    github: '在 GitHub 上搜索...',
+                    stackoverflow: '在 Stack Overflow 上搜索...',
+                    mdn: '在 MDN Web Docs 上搜索...',
+                    youtube: '在 YouTube 上搜索...'
+                };
+                
+                searchInput.placeholder = placeholders[engine] || '搜索网站、工具或资源...';
+            });
+        });
+
+        // 搜索功能
+        searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                const query = this.value.trim();
+                if (!query) return;
+                
+                const activeEngine = document.querySelector('.engine-btn.active').getAttribute('data-engine');
+                const searchUrls = {
+                    google: `https://www.google.com/search?q=${encodeURIComponent(query)}`,
+                    github: `https://github.com/search?q=${encodeURIComponent(query)}`,
+                    stackoverflow: `https://stackoverflow.com/search?q=${encodeURIComponent(query)}`,
+                    mdn: `https://developer.mozilla.org/search?q=${encodeURIComponent(query)}`,
+                    youtube: `https://www.youtube.com/results?search_query=${encodeURIComponent(query)}`
+                };
+                
+                window.open(searchUrls[activeEngine], '_blank');
+                this.value = '';
+            }
+        });
+
+        // 分类标签切换
+        const categoryTabs = document.querySelectorAll('.category-tab');
+        const categoryContents = document.querySelectorAll('.category-content');
+        
+        categoryTabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                const targetId = this.getAttribute('data-target');
+                
+                // 更新标签状态
+                categoryTabs.forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                
+                // 显示对应内容
+                categoryContents.forEach(content => {
+                    content.classList.remove('active');
+                });
+                document.getElementById(targetId).classList.add('active');
+            });
+        });
+
+        // 添加悬停效果
+        document.querySelectorAll('.link-card, .category-item, .icon-btn, .engine-btn').forEach(element => {
+            element.addEventListener('mouseenter', function() {
+                this.style.transform = this.style.transform || '';
+            });
+            
+            element.addEventListener('mouseleave', function() {
+                if (!this.classList.contains('active')) {
+                    this.style.transform = '';
+                }
+            });
+        });
+
+        // 动画延迟效果
+        document.addEventListener('DOMContentLoaded', function() {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            fadeElements.forEach(el => {
+                el.style.opacity = '0';
+                setTimeout(() => {
+                    el.style.opacity = '1';
+                }, 100);
+            });
+        });
+
+        // 添加随机颜色到链接图标
+        const colors = [
+            'linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%)',
+            'linear-gradient(135deg, #10B981 0%, #06B6D4 100%)',
+            'linear-gradient(135deg, #F59E0B 0%, #EF4444 100%)',
+            'linear-gradient(135deg, #8B5CF6 0%, #EC4899 100%)'
+        ];
+        
+        document.querySelectorAll('.link-icon').forEach(icon => {
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            icon.style.background = randomColor;
+        });
     </script>
-
-    <!-- 网易云歌单播放器（APlayer + MetingJS）
-         lrc-type="0" 表示关闭歌词显示，autoplay="true" 表示自动播放 -->
-    <!-- <meting-js
-        server="netease"
-        type="playlist"
-        id="8417796623"
-        fixed="true"
-        autoplay="true"
-        order="random"
-        theme="#4a89dc"
-        loop="all"
-        preload="auto"
-        volume="0.7"
-        lrc-type="0">
-    </meting-js> -->
-    <!-- APlayer CSS（音乐播放器样式） -->
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css"> -->
-    <!-- APlayer JS（音乐播放器功能） -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script> -->
-    <!-- MetingJS（支持网易云等歌单，需在APlayer后引入） -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js"></script> -->
-    
-    <!-- Giscus 评论系统已在留言板部分实现，此处移除重复代码 -->
 </body>
 </html>
